@@ -1,43 +1,47 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Courses', href: '/#courses' },
-    { name: 'Results', href: '/#results' },
-    { name: 'Resources', href: '/#resources' },
-    { name: 'FAQ', href: '/#faq' },
-    { name: 'Contact', href: '/#contact' },
-  ]
+    { name: "Home", href: "/" },
+    { name: "Courses", href: "/#courses" },
+    { name: "Results", href: "/#results" },
+    { name: "Resources", href: "/#resources" },
+    { name: "FAQ", href: "/#faq" },
+    { name: "Contact", href: "/#contact" },
+  ];
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg' 
-          : 'bg-white shadow-sm'
+        scrolled
+          ? "bg-white/95 backdrop-blur-lg shadow-lg"
+          : "bg-white shadow-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center gap-3">
-            <img src="/logo.svg" alt="Ravindra IAS Logo" className="h-14 w-auto" />
+        <div className="flex justify-between items-center h-20">
+          <Link to="/" className="flex items-center h-full overflow-hidden">
+            <img
+              src="/logo.svg"
+              alt="Ravindra IAS Logo"
+              className="h-32 w-auto object-contain"
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
@@ -58,10 +62,7 @@ const Navbar = () => {
             </a>
           </div>
 
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden">
             {isOpen ? (
               <X className="text-gray-700" size={28} />
             ) : (
@@ -75,7 +76,7 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white shadow-xl"
           >
@@ -102,7 +103,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
